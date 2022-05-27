@@ -11,11 +11,8 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 import os
 from pathlib import Path
-
 from django.template.context_processors import media
 from django.templatetags import static
-
-import Renesans.blog
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -30,6 +27,15 @@ SECRET_KEY = 'django-insecure-l#jb8a1+jdfs$d(-bo#pqqoc(0i^xy5a(do4dlz$5vy#ewe$(d
 DEBUG = True
 
 ALLOWED_HOSTS = []
+
+AUTHENTICATION_BACKENDS = [
+    
+    # Needed to login by username in Django admin, regardless of `allauth`
+    'django.contrib.auth.backends.ModelBackend',
+
+    # `allauth` specific authentication methods, such as login by e-mail
+    'allauth.account.auth_backends.AuthenticationBackend',  
+    ]
 
 # Application definition
 
@@ -56,6 +62,26 @@ INSTALLED_APPS = [
     'Renesans.blog.blog',
     'Renesans.blog.search',
     'Renesans.blog.home',
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'organizations',
+    'django_extensions',
+    # ... include the providers you want to enable:
+    'allauth.socialaccount.providers.auth0',
+    'allauth.socialaccount.providers.authentiq',
+    'allauth.socialaccount.providers.facebook',
+    'allauth.socialaccount.providers.google',
+    'allauth.socialaccount.providers.instagram',
+    'allauth.socialaccount.providers.mailchimp',
+    'allauth.socialaccount.providers.mailru',
+    'allauth.socialaccount.providers.odnoklassniki',
+    'allauth.socialaccount.providers.paypal',
+    'allauth.socialaccount.providers.stripe',
+    'allauth.socialaccount.providers.twitter',
+    'allauth.socialaccount.providers.vk',
+    'allauth.socialaccount.providers.yandex',
 ]
 
 MIDDLEWARE = [
@@ -82,6 +108,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.request',
             ],
         },
     },
@@ -152,3 +179,21 @@ WAGTAILSEARCH_BACKENDS = {
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+SITE_ID = 1
+
+ORGS_SLUGFIELD ='django_extensions.db.fields.AutoSlugField'
+
+# Provider specific settings
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        # For each OAuth based provider, either add a ``SocialApp``
+        # (``socialaccount`` app) containing the required client
+        # credentials, or list them here:
+        'APP': {
+            'client_id': '123',
+            'secret': '456',
+            'key': ''
+        }
+    }
+}
