@@ -13,6 +13,8 @@ import os
 from pathlib import Path
 from django.template.context_processors import media
 from django.templatetags import static
+from django.contrib.admin import site
+from django.contrib import auth
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -40,6 +42,7 @@ AUTHENTICATION_BACKENDS = [
 # Application definition
 
 INSTALLED_APPS = [
+    'info.apps.InfoConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -59,29 +62,23 @@ INSTALLED_APPS = [
     'wagtail.core',
     'taggit',
     'modelcluster',
-    'Renesans.blog.blog',
-    'Renesans.blog.search',
-    'Renesans.blog.home',
+    'blog.blog',
+    'blog.search',
+    'blog.home',
     'django.contrib.sites',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
-    'organizations',
     'django_extensions',
     # ... include the providers you want to enable:
     'allauth.socialaccount.providers.auth0',
     'allauth.socialaccount.providers.authentiq',
-    'allauth.socialaccount.providers.facebook',
     'allauth.socialaccount.providers.google',
     'allauth.socialaccount.providers.instagram',
-    'allauth.socialaccount.providers.mailchimp',
-    'allauth.socialaccount.providers.mailru',
-    'allauth.socialaccount.providers.odnoklassniki',
-    'allauth.socialaccount.providers.paypal',
-    'allauth.socialaccount.providers.stripe',
-    'allauth.socialaccount.providers.twitter',
     'allauth.socialaccount.providers.vk',
-    'allauth.socialaccount.providers.yandex',
+    'booking',
+    'crispy_forms',
+    'crispy_bootstrap5',
 ]
 
 MIDDLEWARE = [
@@ -144,6 +141,8 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+LOGIN_REDIRECT_URL='/'
+
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
 
@@ -191,9 +190,21 @@ SOCIALACCOUNT_PROVIDERS = {
         # (``socialaccount`` app) containing the required client
         # credentials, or list them here:
         'APP': {
-            'client_id': '123',
-            'secret': '456',
+            'client_id': '383617119836-osj18rl2dg4of3rf4dr5g1c08ju2j0ag.apps.googleusercontent.com',
+            'secret': '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',
             'key': ''
         }
     }
 }
+BOOKING_TITLE = "Футбольный клуб Чуй"
+BOOKING_DESC = "Забронируйте поле в один клик"
+BOOKING_BG = "img/booking_bg.jpg"
+
+BOOKING_SUCCESS_REDIRECT_URL = "Success redirect url"
+BOOKING_DISABLE_URL = "Redirect to this url if create booking is disable"
+
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+
+CRISPY_TEMPLATE_PACK = "bootstrap5"
+
+AUTH_USER_MODEL="info.User"

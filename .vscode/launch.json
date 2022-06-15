@@ -1,20 +1,24 @@
 {
-    // Используйте IntelliSense, чтобы узнать о возможных атрибутах.
-    // Наведите указатель мыши, чтобы просмотреть описания существующих атрибутов.
-    // Для получения дополнительной информации посетите: https://go.microsoft.com/fwlink/?linkid=830387
-    "version": "4.0",
+    "version": "0.2.0",
     "configurations": [
-
-        {
-            "name": "Python: Django",
-            "type": "python",
-            "request": "launch",
-            "program": "${workspaceFolder}\\manage.py",
-            "args": [
-                "runserver"
-            ],
-            "django": true,
-            "justMyCode": true
-        }
+      {
+        "name": "Django",
+        "type": "python",
+        "request": "launch",
+        "stopOnEntry": false,
+        "python": "${workspaceRoot}/venv/Scripts/python",
+        "program": "${workspaceRoot}/manage.py",
+          "args": [
+              "runserver",
+              "8000"
+          ],
+          "env": {
+              "DJANGO_DB_NAME": "db",
+              "DJANGO_DB_HOST": "172.17.0.2",
+              "DJANGO_DB_PORT": "8000",
+              "DJANGO_DEBUG": "True",
+              "DJANGO_SETTINGS_MODULE": "settings"
+          }
+      },
     ]
-}
+  }
